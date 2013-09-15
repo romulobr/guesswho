@@ -40,7 +40,7 @@ describe('Game Service', function () {
 
             before(function (done) {
                 fakeRedisClient.exists = function (key, callback) {
-                    callback('0');
+                    callback(null, 0);
                 };
                 done();
             });
@@ -71,9 +71,9 @@ describe('Game Service', function () {
                 fakeRedisClient.exists = function (key, callback) {
                     //console.log('verifying existence of key: %s', key);
                     if (key === 'game.newGame') {
-                        callback('1');
+                        callback(null, 1);
                     } else {
-                        callback('0');
+                        callback(null, 0);
                     }
                 };
                 done();
