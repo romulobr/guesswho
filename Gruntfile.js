@@ -21,7 +21,11 @@ module.exports = function (grunt) {
                 exports: false,
                 it: false,
                 console: false,
-                beforeEach: false
+                beforeEach: false,
+                before: false,
+                after: false,
+                __dirname: false,
+                afterEach: false
               },
               strict: true,
               globalstrict: true
