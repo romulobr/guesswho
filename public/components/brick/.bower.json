@@ -1,0 +1,26 @@
+{
+  "name": "brick",
+  "description": "UI Web Components for Mobile Web Apps",
+  "keywords": [
+    "brick",
+    "custom",
+    "elements",
+    "x-tag"
+  ],
+  "main": [
+    "dist/brick.js",
+    "dist/brick.css",
+    "dist/OpenSans-SemiBold.ttf"
+  ],
+  "homepage": "https://github.com/mozilla/brick",
+  "_release": "master",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4e97e163ae1dd521a20175aba72e30edc75ed618"
+  },
+  "_source": "git://github.com/mozilla/brick.git",
+  "_target": "*",
+  "_originalSource": "brick",
+  "_direct": true
+}

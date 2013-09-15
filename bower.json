@@ -1,0 +1,23 @@
+{
+  "name": "guess-who",
+  "version": "0.0.1",
+  "homepage": "-notyet",
+  "authors": [
+    "Romulo Santos <romulobr@gmail.com>"
+  ],
+  "description": "cool web game",
+  "main": "index.html",
+  "keywords": [
+    "game",
+    "simple"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

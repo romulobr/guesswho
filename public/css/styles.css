@@ -1,0 +1,40 @@
+x-iconbutton {
+    width:  90%;
+    height: 50px;
+    margin: 5px;
+}
+
+x-appbar {
+    height: 25px;
+    vertical-align: middle;
+    font-size: 12pt;
+}
+
+.input {
+    font-size: 18pt;
+    font-family: verdana;
+}
+
+input {
+    margin: 5px;
+    font-size: 18pt;
+    width:  90%;
+
+    text-align: center;
+}
+
+#main-view {
+    text-align: center;
+}
+
+#content {
+    margin-top: 5px;
+
+}
+
+#content h1{
+    font-size: 18pt;
+    font-family: verdana;
+    text-align: left;
+    margin-left: 15px;
+}
