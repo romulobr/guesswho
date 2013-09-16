@@ -22,8 +22,8 @@ app.configure(function () {
 
 app.post('/game', function (req, res) {
   console.log("%j", req.body);
-  gameService.createGameWithId(req.body.gameName, function () {
-    res.json({success : true});
+  gameService.createGameWithId(req.body.gameName, function (response) {
+    res.json(response);
   });
 });
 

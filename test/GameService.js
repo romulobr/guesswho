@@ -27,6 +27,7 @@ describe('Game Service', function () {
         var gameId = 'newGame';
         afterEach(function () {
             fakeRedisClient.exists.restore();
+            fakeRedisClient.set.restore();
         });
 
         before( function (done) {
@@ -47,17 +48,17 @@ describe('Game Service', function () {
 
             it('creates a game on redis', function (done) {
                 fakeRedisClient.set = function (key, value, callback) {
-                    //console.log('calling redis with key: %s', key);
-                    callback();
+                    callback('OK');
                 };
 
                 var redisSetSpy = sinon.spy(fakeRedisClient, 'set'),
                 redisExistsSpy = sinon.spy(fakeRedisClient, 'exists'),
                 game = Game.create('game.'+gameId),
 
-                gameCreationCallback = function () {
+                gameCreationCallback = function (result) {
                     expect(redisExistsSpy.calledWith('game.'+gameId)).to.be(true);
                     expect(redisSetSpy.calledWith('game.'+gameId, JSON.stringify(game))).to.be(true);
+                    expect(result.status === 'OK');
                     done();
                 };
 
@@ -69,7 +70,6 @@ describe('Game Service', function () {
 
             before(function (done) {
                 fakeRedisClient.exists = function (key, callback) {
-                    //console.log('verifying existence of key: %s', key);
                     if (key === 'game.newGame') {
                         callback(null, 1);
                     } else {
@@ -81,18 +81,18 @@ describe('Game Service', function () {
 
             it('creates a game on redis', function (done) {
                 fakeRedisClient.set = function (key, value, callback) {
-                    //console.log('calling redis with key: %s', key);
-                    callback();
+                    callback('OK');
                 };
 
                 var redisSetSpy = sinon.spy(fakeRedisClient, 'set'),
                 redisExistsSpy = sinon.spy(fakeRedisClient, 'exists'),
                 game = Game.create('game.'+gameId+'1'),
 
-                gameCreationCallback = function () {
+                gameCreationCallback = function (result) {
                     expect(redisExistsSpy.calledWith('game.'+gameId)).to.be(true);
                     expect(redisSetSpy.calledWith('game.'+gameId+'1', JSON.stringify(game))).to.be(true);
                     expect(redisExistsSpy.calledWith('game.'+gameId+'1')).to.be(true);
+                    expect(result.status === 'OK');
                     done();
                 };
 
@@ -102,21 +102,25 @@ describe('Game Service', function () {
 
 
     });
-    // it('find a game based on it\'s id ', function (done) {
 
-    //     fakeRedisClient.set = function (key, value, callback) {
-    //         callback();
-    //     };
-    //     var spy = sinon.spy(fakeRedisClient, 'set');
-    //     var dependencies = {redisClient: fakeRedisClient, Game: Game},
-    //     service = GameService.create(dependencies),
-    //     gameId = 'newGame',
-    //     game = Game.create(gameId),
-    //     callback = function () {
-    //         expect(spy.calledWith('game.'+gameId, JSON.stringify(game))).to.be(true);
-    //         done();
-    //     };
+    describe('given an existing game', function () {
 
-    //     service.createGameWithId(gameId, callback);
-    // });
+        fakeRedisClient.set = function (key, value, callback) {
+            callback('OK');
+        };
+
+        fakeRedisClient.exists = function (key,callback) {
+            callback(key === 'existingGame');
+        };
+
+        // if('finds a game by name', function () {
+
+        // });
+        // it('allows player to join a game', function () {
+        //     service.createGameWithId('existingGame', function () {
+        //     service.addPlayerToGame(gameId, 'namedPlayer');
+        //     });
+        // });
+    });
+
 });

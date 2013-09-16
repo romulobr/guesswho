@@ -14,4 +14,5 @@ describe('game', function () {
     expect(game.playerCount()).to.be(0);
     expect(game.players.length).to.be(0);
   });
+
 });
