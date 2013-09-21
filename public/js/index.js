@@ -1,14 +1,15 @@
 function createApp () {
+    var defaultOptions = {gameName: null, playerName: null};
     function validOptions(options) {
         return !!options.gameName && !!options.playerName
     };
     var app = {
-        options: {gameName: null, playerName: null},
+        options: defaultOptions,
         fields : {gameName: null, playerName: null},
         buttons: {joinGame: null, createGame: null},
         gameStarted: null,
         init: function () {
-            this.loadOptions()
+            app.loadOptions()
                 .loadFields()
                 .loadButtons()
                 .optionsToFields()
@@ -20,7 +21,10 @@ function createApp () {
             return app;
         },
         loadOptions: function () {
-            this.options = store.get('options', app);
+            app.options = store.get('options', app);
+            if (!app.options) {
+                app.options = defaultOptions;
+            }
             return app;
         },
         saveOptions: function () {
@@ -49,11 +53,11 @@ function createApp () {
             return app;
         },
         fieldsToOptions : function () {
-            this.loadFields();
-            this.options.gameName = this.fields.gameName.val();
-            this.options.playerName = this.fields.playerName.val();
-            console.log('player name: '+ this.options.playerName);
-            console.log('game name: '+ this.options.gameName);
+            app.loadFields();
+            app.options.gameName = app.fields.gameName.val();
+            app.options.playerName = app.fields.playerName.val();
+            console.log('player name: '+ app.options.playerName);
+            console.log('game name: '+ app.options.gameName);
             return app;
         },
         createGame: function () {
