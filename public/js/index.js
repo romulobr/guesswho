@@ -1,6 +1,8 @@
 function createApp () {
+    function validOptions(options) {
+        return !!options.gameName && !!options.playerName
+    };
     var app = {
-
         options: {gameName: null, playerName: null},
         fields : {gameName: null, playerName: null},
         buttons: {joinGame: null, createGame: null},
@@ -57,13 +59,13 @@ function createApp () {
         createGame: function () {
             console.log("%j",this);
             app.fieldsToOptions();
-            if (app.options.gameName && app.options.playerName) {
+            if (validOptions(app.options)) {
                 $.post('/game', {gameName:app.options.gameName}, function (data, textStatus) {
                     app.game = data.game;
                     app.saveOptions();
                 });
             } else {
-                this.showMessage("We need a name and a game name to proceed.");
+                app.showMessage("We need a name and a game name to proceed.");
             }
             return app;
         },

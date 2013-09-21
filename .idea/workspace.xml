@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/components/brick/.bower.json" afterPath="$PROJECT_DIR$/public/components/brick/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/GameService.js" afterPath="$PROJECT_DIR$/lib/GameService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/GameService.js" afterPath="$PROJECT_DIR$/test/GameService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/components/brick/bower.json" afterPath="$PROJECT_DIR$/public/components/brick/bower.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/components/brick/package.json" afterPath="$PROJECT_DIR$/public/components/brick/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/styles.css" afterPath="$PROJECT_DIR$/public/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/index.js" afterPath="$PROJECT_DIR$/public/js/index.js" />
     </list>
     <ignored path="guess-who.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,7 +20,7 @@
     <file path="$PROJECT_DIR$/public/components/brick/dist/brick.css" changelist="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" time="1379744184989" ignored="false" />
     <file path="$PROJECT_DIR$/public/components/brick/component/deck/demo/x-tag-components.js" changelist="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" time="1379744184989" ignored="false" />
     <file path="/styles.css" changelist="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" time="1379748389646" ignored="false" />
-    <file path="/index.js" changelist="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" time="1379755238302" ignored="false" />
+    <file path="/index.js" changelist="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" time="1379756015642" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +61,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="63" selection-start="1223" selection-end="1223" vertical-scroll-proportion="-21.25">
+            <state line="5" column="29" selection-start="209" selection-end="209" vertical-scroll-proportion="-3.125">
               <folding />
             </state>
           </provider>
@@ -76,7 +70,7 @@
       <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="55" selection-start="1224" selection-end="1224" vertical-scroll-proportion="0.49258474">
+            <state line="67" column="19" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.842161">
               <folding />
             </state>
           </provider>
@@ -85,7 +79,7 @@
       <file leaf-file-name="styles.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0">
+            <state line="11" column="29" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -636,13 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/components/brick/component/iconbutton/xtag.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -685,16 +672,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="29" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="63" selection-start="1223" selection-end="1223" vertical-scroll-proportion="-21.25">
+        <state line="5" column="29" selection-start="209" selection-end="209" vertical-scroll-proportion="-3.125">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="55" selection-start="1224" selection-end="1224" vertical-scroll-proportion="0.49258474">
+        <state line="67" column="19" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.842161">
           <folding />
         </state>
       </provider>
