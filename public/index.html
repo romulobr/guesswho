@@ -6,8 +6,18 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 
     <script type="text/javascript" src="components/brick/dist/brick.js"></script>
+    <script type="text/javascript" src="components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="components/store.js/store.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
 </head>
 
+<script>
+    $(document).ready(function () {
+        app = createApp();
+    });
+</script>
 <body>
     <div id='main-view'>
             <x-appbar>
@@ -16,16 +26,16 @@
             </x-appbar>
         <div id='content'>
             <h1> Your Name</h1>
-            <input id="player_name" type="text">
+            <input id="player_name_input" type="text">
 
             <h1> Game's Name </h1>
-            <input id="player_name" type="text">
+            <input id="game_name_input" type="text">
             <br/>
-            <x-iconbutton>
-                <h2>Create this Game</h2>
+            <x-iconbutton id="create_game_button">
+                <a id="create_game_link">Create this Game</a>
             </x-iconbutton>
-            <x-iconbutton>
-                <h2>Join this Game</h2>
+            <x-iconbutton id="join_game_button">
+                <a id="join_game_link">Join this Game</a>
             </x-iconbutton>
         </div>
     </div>

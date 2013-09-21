@@ -76,13 +76,13 @@ describe('Game Service', function () {
                         callback(null, 0);
                     }
                 };
+                fakeRedisClient.set = function (key, value, callback) {
+                    callback('OK');
+                };
                 done();
             });
 
             it('creates a game on redis', function (done) {
-                fakeRedisClient.set = function (key, value, callback) {
-                    callback('OK');
-                };
 
                 var redisSetSpy = sinon.spy(fakeRedisClient, 'set'),
                 redisExistsSpy = sinon.spy(fakeRedisClient, 'exists'),
@@ -104,18 +104,33 @@ describe('Game Service', function () {
     });
 
     describe('given an existing game', function () {
+        var existingGameKey = 'existingGame';
+        before(function (done) {
+            fakeRedisClient.set = function (key, value, callback) {
+                callback('OK');
+            };
 
-        fakeRedisClient.set = function (key, value, callback) {
-            callback('OK');
-        };
+            fakeRedisClient.exists = function (key, callback) {
+                if (key === existingGameKey) {
+                    callback(null, 1);
+                } else {
+                    callback(null, 0);
+                }
+            };
 
-        fakeRedisClient.exists = function (key,callback) {
-            callback(key === 'existingGame');
-        };
+            fakeRedisClient.get = function (key, callback) {
+                callback(null, JSON.stringify(Game.create(key)));
+            };
+            done();
+        });
 
-        // if('finds a game by name', function () {
-
-        // });
+         it('finds a game by name', function (done) {
+             service.findGameWithId(existingGameKey, function (game) {
+                 console.log('<<<<<>>> game: %j', game);
+                 expect(game.id).to.be(existingGameKey);
+                 done();
+            });
+         });
         // it('allows player to join a game', function () {
         //     service.createGameWithId('existingGame', function () {
         //     service.addPlayerToGame(gameId, 'namedPlayer');
