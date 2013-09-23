@@ -78,7 +78,7 @@ function createApp () {
             return app;
         },
         joinGame: function () {
-            console.log('[CLIENT] connecting to url'+ app.socketUrl);
+            console.log('[CLIENT] connecting to url: '+ app.socketUrl);
             var socket = io.connect(app.socketUrl);
 
             socket.on('joined game', function (data) {
