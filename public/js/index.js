@@ -14,7 +14,14 @@ function createApp () {
                 .loadFields()
                 .loadButtons()
                 .optionsToFields()
-                .bindEvents();
+                .bindEvents()
+                .fetchSocketUrl();
+        },
+        fetchSocketUrl: function () {
+            $.get('/socketUrl', function (data, textStatus) {
+                app.socketUrl = data.socketUrl;
+                console.log("Socket URL is: " + app.socketUrl);
+            });
         },
         showMessage: function (message) {
             var template = _.template("<div class=\"note\"><%= message %></div>");
@@ -45,6 +52,7 @@ function createApp () {
         bindEvents: function () {
             app.buttons.createGame.click(app.createGame);
             app.buttons.joinGame.click(app.joinGame);
+            return app;
         },
         optionsToFields : function () {
             if (app.options) {
@@ -68,7 +76,6 @@ function createApp () {
                 $.post('/game', {gameName:app.options.gameName}, function (data, textStatus) {
                     alert(JSON.stringify(data));
                     app.game = data.game;
-                    app.socketUrl = data.socketUrl;
                     app.saveOptions();
                     app.joinGame();
                 });

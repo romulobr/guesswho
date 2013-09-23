@@ -42,8 +42,12 @@ app.configure(function () {
 app.post('/game', function (req, res) {
   console.log("%j", req.body);
   gameService.createGameWithId(req.body.gameName, function (response) {
-      res.json({status:response.status, socketUrl: socketUrl});
+      res.json({status:response.status});
   });
+});
+
+app.get('/socketUrl', function (req, res) {
+    res.json({socketUrl: socketUrl});
 });
 
 app.listen(3000);
