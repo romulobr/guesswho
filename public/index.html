@@ -9,17 +9,18 @@
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
     <script type="text/javascript" src="components/underscore/underscore.js"></script>
     <script type="text/javascript" src="components/store.js/store.js"></script>
+    <script type="text/javascript" src="components/socket.io-client/dist/socket.io.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-
+    <script>
+        $(document).ready(function () {
+            app = createApp();
+        });
+    </script>
 </head>
 
-<script>
-    $(document).ready(function () {
-        app = createApp();
-    });
-</script>
 <body>
-    <div id='main-view'>
+<x-flipbox>
+    <div id="setup-view">
         <x-appbar>
             <header>Guess Who</header>
             <div>?</div>
@@ -39,6 +40,10 @@
             </x-iconbutton>
         </div>
     </div>
+    <div id="setup_view">
+        <H1>YOU JOINED THE GAME</H1>
+    </div>
+</x-flipbox>
 </body>
 
 </html>

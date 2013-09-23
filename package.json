@@ -10,7 +10,10 @@
     "expect.js": "0.2.x",
     "redis": "~0.8.4",
     "hiredis": "~0.1.15",
-    "node-uuid": "~1.4.1"
+    "node-uuid": "~1.4.1",
+    "underscore": "~1.5.2",
+    "socket.io-client": "~0.9.16",
+    "socket.io": "~0.9.16"
   },
   "main": "app.js",
   "devDependencies": {

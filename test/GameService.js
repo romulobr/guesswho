@@ -1,6 +1,7 @@
 "use strict";
 var expect = require('expect.js'),
-    sinon = require('sinon');
+    sinon = require('sinon'),
+    _ = require('underscore');
 
 var GameService = require('../lib/GameService.js'),
     Game = require('../lib/Game.js');
@@ -124,18 +125,12 @@ describe('Game Service', function () {
             done();
         });
 
-         it('finds a game by name', function (done) {
-             service.findGameWithId(existingGameKey, function (game) {
-                 console.log('<<<<<>>> game: %j', game);
-                 expect(game.id).to.be(existingGameKey);
+         it('finds a game by id', function (done) {
+             service.findGameWithId(existingGameKey, function (result) {
+                 expect(result.game.id).to.be(existingGameKey);
                  done();
             });
          });
-        // it('allows player to join a game', function () {
-        //     service.createGameWithId('existingGame', function () {
-        //     service.addPlayerToGame(gameId, 'namedPlayer');
-        //     });
-        // });
     });
 
 });

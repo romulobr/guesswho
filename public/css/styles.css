@@ -52,7 +52,11 @@ input {
     text-align: center;
 }
 
-#main-view {
+#setup-view {
+    text-align: center;
+}
+
+#game-view {
     text-align: center;
 }
 

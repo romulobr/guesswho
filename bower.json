@@ -19,5 +19,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "socket.io-client": "~0.9.16"
+  }
 }

@@ -1,5 +1,6 @@
 function createApp () {
     var defaultOptions = {gameName: null, playerName: null};
+    var socketUrl;
     function validOptions(options) {
         return !!options.gameName && !!options.playerName
     };
@@ -65,8 +66,11 @@ function createApp () {
             app.fieldsToOptions();
             if (validOptions(app.options)) {
                 $.post('/game', {gameName:app.options.gameName}, function (data, textStatus) {
+                    alert(JSON.stringify(data));
                     app.game = data.game;
+                    app.socketUrl = data.socketUrl;
                     app.saveOptions();
+                    app.joinGame();
                 });
             } else {
                 app.showMessage("We need a name and a game name to proceed.");
@@ -74,6 +78,17 @@ function createApp () {
             return app;
         },
         joinGame: function () {
+            console.log('[CLIENT] connecting to url'+ app.socketUrl);
+            var socket = io.connect(app.socketUrl);
+
+            socket.on('joined game', function (data) {
+                alert('someone joined the game:'+ JSON.stringify(data));
+            });
+            socket.on('connect', function () {
+                alert('[CLIENT] connected');
+                console.log('[CLIENT] connected');
+                socket.emit('join game',{ gameId:app.options.gameName, playerName:app.options.playerName });
+            });
             return app;
         }
     };
