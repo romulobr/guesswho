@@ -18,10 +18,7 @@ function createApp () {
                 .fetchSocketUrl();
         },
         fetchSocketUrl: function () {
-            $.get('/socketUrl', function (data, textStatus) {
-                app.socketUrl = data.socketUrl;
-                console.log("Socket URL is: " + app.socketUrl);
-            });
+            app.socketUrl = window.location.protocol+"//"+window.location.hostname+":7001";
         },
         showMessage: function (message) {
             var template = _.template("<div class=\"note\"><%= message %></div>");
@@ -89,11 +86,10 @@ function createApp () {
             var socket = io.connect(app.socketUrl);
 
             socket.on('joined game', function (data) {
-                alert('someone joined the game:'+ JSON.stringify(data));
+                app.showMessage("A player joined the game"+JSON.stringify(data));
             });
             socket.on('connect', function () {
-                alert('[CLIENT] connected');
-                console.log('[CLIENT] connected');
+                console.log('[CLIENT] connected: '+ app.socketUrl);
                 socket.emit('join game',{ gameId:app.options.gameName, playerName:app.options.playerName });
             });
             return app;
