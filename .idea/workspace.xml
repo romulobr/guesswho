@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7867c0e0-4683-4c6a-bbaf-d764d8a48d1e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ConnectionService.js" afterPath="$PROJECT_DIR$/lib/ConnectionService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/index.js" afterPath="$PROJECT_DIR$/public/js/index.js" />
     </list>
     <ignored path="guess-who.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +54,7 @@
       <file leaf-file-name="ConnectionService.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/ConnectionService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="121" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.81646276">
+            <state line="78" column="121" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.83314794">
               <folding />
             </state>
           </provider>
@@ -534,7 +533,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/ConnectionService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="121" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.81646276">
+        <state line="78" column="121" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.83314794">
           <folding />
         </state>
       </provider>
