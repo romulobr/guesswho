@@ -90,18 +90,23 @@ function createApp () {
             console.log('[CLIENT] connecting to url: '+ app.socketUrl);
             var socket = io.connect(app.socketUrl);
 
-            socket.on('join game success', function (data) {
+            socket.on('join success', function (data) {
                 app.showMessage("A player joined the game"+JSON.stringify(data));
                 console.log("A player joined the game"+JSON.stringify(data));
+                app.flipView();
             });
-            socket.on('join game fail', function (data) {
+            socket.on('new player', function (data) {
+                app.showMessage("A player joined the game"+JSON.stringify(data));
+                console.log("A player joined the game"+JSON.stringify(data));
+                app.flipView();
+            });
+            socket.on('join fail', function (data) {
                 app.showMessage("Couldn't join the game" + data.message);
                 console.log("Couldn't join the game" + JSON.stringify(data.message));
             });
             socket.on('connect', function () {
                 console.log('[CLIENT] connected: '+ app.socketUrl);
                 socket.emit('join game',{ gameId:app.options.gameName, playerName:app.options.playerName });
-                app.flipView();
             });
             return app;
         }
