@@ -40,8 +40,18 @@
             </x-iconbutton>
         </div>
     </div>
-    <div id="setup_view">
-        <H1>YOU JOINED THE GAME</H1>
+    <div id="game_view">
+        <x-appbar>
+            <header>Guess Who</header>
+            <div>?</div>
+        </x-appbar>
+        <div id='content'>
+            <H1>YOU JOINED THE GAME</H1>
+            <p>waiting for other players...</p>
+            <ul id="player_list">
+
+            </ul>
+        </div>
     </div>
 </x-flipbox>
 </body>

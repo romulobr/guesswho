@@ -53,20 +53,11 @@ describe('Socket.io connection service', function () {
             if (clientSocket) { clientSocket.disconnect();}
         });
 
-//        it('allows players to connect on specified port', function (done) {
-//            clientSocket = socketIoClient.connect(serverUrl);
-//            clientSocket.on('connect', function() {
-//                console.log('[CLIENT] connected');
-//                clientSocket.disconnect();
-//                done();
-//            });
-//        });
 
         it('allows player to join a game', function (done) {
             var socket = socketIoClient.connect(serverUrl);
 
-            socket.on('joined game', function (data) {
-                expect(data.success).to.be(true);
+            socket.on('join game success', function (data) {
                 done();
             });
             socket.on('connect', function () {

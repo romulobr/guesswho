@@ -17,6 +17,12 @@ function createApp () {
                 .bindEvents()
                 .fetchSocketUrl();
         },
+        flipView: function () {
+            $('x-flipbox')[0].toggle();
+        },
+        populatePlayersList: function (playersName) {
+
+        },
         fetchSocketUrl: function () {
             app.socketUrl = window.location.protocol+"//"+window.location.hostname+":7001";
         },
@@ -71,7 +77,6 @@ function createApp () {
             app.fieldsToOptions();
             if (validOptions(app.options)) {
                 $.post('/game', {gameName:app.options.gameName}, function (data, textStatus) {
-                    alert(JSON.stringify(data));
                     app.game = data.game;
                     app.saveOptions();
                     app.joinGame();
@@ -85,12 +90,18 @@ function createApp () {
             console.log('[CLIENT] connecting to url: '+ app.socketUrl);
             var socket = io.connect(app.socketUrl);
 
-            socket.on('joined game', function (data) {
+            socket.on('join game success', function (data) {
                 app.showMessage("A player joined the game"+JSON.stringify(data));
+                console.log("A player joined the game"+JSON.stringify(data));
+            });
+            socket.on('join game fail', function (data) {
+                app.showMessage("Couldn't join the game" + data.message);
+                console.log("Couldn't join the game" + JSON.stringify(data.message));
             });
             socket.on('connect', function () {
                 console.log('[CLIENT] connected: '+ app.socketUrl);
                 socket.emit('join game',{ gameId:app.options.gameName, playerName:app.options.playerName });
+                app.flipView();
             });
             return app;
         }
