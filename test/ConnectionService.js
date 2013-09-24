@@ -57,7 +57,7 @@ describe('Socket.io connection service', function () {
         it('allows player to join a game', function (done) {
             var socket = socketIoClient.connect(serverUrl);
 
-            socket.on('join game success', function (data) {
+            socket.on('join success', function (data) {
                 done();
             });
             socket.on('connect', function () {
