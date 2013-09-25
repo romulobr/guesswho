@@ -4,11 +4,29 @@ function createApp () {
     function validOptions(options) {
         return !!options.gameName && !!options.playerName
     };
+
     var app = {
         options: defaultOptions,
         fields : {gameName: null, playerName: null},
         buttons: {joinGame: null, createGame: null},
         gameStarted: null,
+        viewModel: {
+            players: ko.observableArray([]),
+            addPlayer: function (player) {
+                app.viewModel.players.push(player);
+            }
+        },
+        updatePlayers: function (newPlayers) {
+            var oldPlayer;
+            _.each(newPlayers, function (newPlayer) {
+                oldPlayer = _.findWhere(app.viewModel.players(), {realName: newPlayer.realName});
+                console.log(JSON.stringify(oldPlayer));
+                if (!oldPlayer) {
+                    newPlayer.fictionalName = "change me."
+                    app.viewModel.addPlayer(newPlayer);
+                }
+            });
+        },
         init: function () {
             app.loadOptions()
                 .loadFields()
@@ -16,6 +34,7 @@ function createApp () {
                 .optionsToFields()
                 .bindEvents()
                 .fetchSocketUrl();
+                ko.applyBindings(app.viewModel);
         },
         flipView: function () {
             $('x-flipbox')[0].toggle();
@@ -88,17 +107,19 @@ function createApp () {
         },
         joinGame: function () {
             console.log('[CLIENT] connecting to url: '+ app.socketUrl);
+            app.fieldsToOptions();
             var socket = io.connect(app.socketUrl);
 
             socket.on('join success', function (data) {
-                app.showMessage("A player joined the game"+JSON.stringify(data));
+                app.showMessage("You joined the game"+JSON.stringify(data));
                 console.log("A player joined the game"+JSON.stringify(data));
+                app.updatePlayers(data.players);
                 app.flipView();
             });
             socket.on('new player', function (data) {
                 app.showMessage("A player joined the game"+JSON.stringify(data));
                 console.log("A player joined the game"+JSON.stringify(data));
-                app.flipView();
+                app.updatePlayers(data.players);
             });
             socket.on('join fail', function (data) {
                 app.showMessage("Couldn't join the game" + data.message);
