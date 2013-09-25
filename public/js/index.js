@@ -21,7 +21,7 @@ function createApp () {
             _.each(newPlayers, function (newPlayer) {
                 oldPlayer = _.findWhere(app.viewModel.players(), {realName: newPlayer.realName});
                 console.log(JSON.stringify(oldPlayer));
-                if (!oldPlayer) {
+                if (!oldPlayer && newPlayer.realName != app.options.playerName) {
                     newPlayer.fictionalName = "change me."
                     app.viewModel.addPlayer(newPlayer);
                 }
