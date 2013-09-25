@@ -28,11 +28,8 @@ function createApp () {
             });
         },
         removePlayer: function (playerName) {
-            _.each(app.viewModel.players(), function (player, i) {
-                if(player.realName == playerName) {
-                    array.splice(i,1);
-                    return;
-                }
+            app.viewModel.players.remove( function (player) {
+                return player.realName === playerName;
             });
         },
         init: function () {
@@ -131,14 +128,13 @@ function createApp () {
             var socket = io.connect(app.socketUrl);
 
             socket.on('join success', function (data) {
-                app.showMessage("You joined the game"+JSON.stringify(data));
-                console.log("A player joined the game"+JSON.stringify(data));
+                console.log("You joined the game: "+JSON.stringify(data));
                 app.updatePlayers(data.players);
                 app.flipView();
             });
             socket.on('new player', function (data) {
-                app.showMessage("A player joined the game"+JSON.stringify(data));
-                console.log("A player joined the game"+JSON.stringify(data));
+                app.showMessage("Another player has joined the game!");
+                console.log("Another player has joined the game: "+JSON.stringify(data));
                 app.updatePlayers(data.players);
             });
             socket.on('join fail', function (data) {
@@ -149,8 +145,10 @@ function createApp () {
                 console.log('[CLIENT] connected: '+ app.socketUrl);
                 socket.emit('join game',{ gameId:app.options.gameName, playerName:app.options.playerName });
             });
-            socket.on('player disconnect', function () {
-                app.removePlayer(data.player.realName);
+            socket.on('player disconnect', function (data) {
+                app.showMessage(data.playerRealName+" has left the game.");
+                console.log('A player disconnected:'+ data.playerRealName);
+                app.removePlayer(data.playerRealName);
             });
             return app;
         }
