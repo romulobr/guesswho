@@ -27,6 +27,14 @@ function createApp () {
                 }
             });
         },
+        removePlayer: function (playerName) {
+            _.each(app.viewModel.players(), function (player, i) {
+                if(player.realName == playerName) {
+                    array.splice(i,1);
+                    return;
+                }
+            });
+        },
         init: function () {
             app.loadOptions()
                 .loadFields()
@@ -140,6 +148,9 @@ function createApp () {
             socket.on('connect', function () {
                 console.log('[CLIENT] connected: '+ app.socketUrl);
                 socket.emit('join game',{ gameId:app.options.gameName, playerName:app.options.playerName });
+            });
+            socket.on('player disconnect', function () {
+                app.removePlayer(data.player.realName);
             });
             return app;
         }
