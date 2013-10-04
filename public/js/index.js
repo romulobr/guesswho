@@ -10,54 +10,17 @@ function createApp () {
         fields : {gameName: null, playerName: null},
         buttons: {joinGame: null, createGame: null},
         gameStarted: null,
-        viewModel: {
-            players: ko.observableArray([]),
-            addPlayer: function (player) {
-                app.viewModel.players.push(player);
-            }
-        },
-        updatePlayers: function (newPlayers) {
-            var oldPlayer;
-            _.each(newPlayers, function (newPlayer) {
-                oldPlayer = _.findWhere(app.viewModel.players(), {realName: newPlayer.realName});
-                console.log(JSON.stringify(oldPlayer));
-                if (!oldPlayer && newPlayer.realName != app.options.playerName) {
-                    newPlayer.fictionalName = "change me."
-                    app.viewModel.addPlayer(newPlayer);
-                }
-            });
-        },
-        removePlayer: function (playerName) {
-            app.viewModel.players.remove( function (player) {
-                return player.realName === playerName;
-            });
-        },
         init: function () {
             app.loadOptions()
                 .loadFields()
                 .loadButtons()
                 .optionsToFields()
                 .bindEvents()
-                .fetchSocketUrl();
-            ko.bindingHandlers.fadeVisible = {
-                init: function(element, valueAccessor) {
-                    // Initially set the element to be instantly visible/hidden depending on the value
-                    var value = valueAccessor();
-                    $(element).toggle(ko.utils.unwrapObservable(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
-                },
-                update: function(element, valueAccessor) {
-                    // Whenever the value subsequently changes, slowly fade the element in or out
-                    var value = valueAccessor();
-                    ko.utils.unwrapObservable(value) ? $(element).fadeIn() : $(element).fadeOut();
-                }
-            };
+                .fetchSocketUrl()            ;;
                 ko.applyBindings(app.viewModel);
         },
         flipView: function () {
             $('x-flipbox')[0].toggle();
-        },
-        populatePlayersList: function (playersName) {
-
         },
         fetchSocketUrl: function () {
             app.socketUrl = window.location.protocol+"//"+window.location.hostname+":7001";
