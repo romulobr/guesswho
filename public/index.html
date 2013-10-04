@@ -10,16 +10,13 @@
     <script type="text/javascript" src="components/knockout.js/knockout.js"></script>
     <script type="text/javascript" src="components/underscore/underscore.js"></script>
     <script type="text/javascript" src="components/store.js/store.js"></script>
-    <script type="text/javascript" src="components/socket.io-client/dist/socket.io.js">
-    <script type="text/javascript" src="components/requirejs/dist/require.js"></script></script>
+    <script type="text/javascript" src="components/socket.io-client/dist/socket.io.js"></script>
     <script type="text/javascript" src="js/options.js"></script>
     <script type="text/javascript" src="js/sockets.js"></script>
     <script type="text/javascript" src="js/viewModel.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
     <script>
-        $(document).ready(function () {
-            var controller = App.createController();
-        });
+        $(document).ready(App.init);
     </script>
 </head>
 
@@ -32,15 +29,15 @@
         </x-appbar>
         <div id='content'>
             <h1> Your Name</h1>
-            <input id="player_name_input" type="text">
+            <input id="player_name_input" type="text" data-bind="text: playerName">
 
             <h1> Game's Name </h1>
-            <input id="game_name_input" type="text">
+            <input id="game_name_input" type="text" data-bind="text: gameName">
             <br/>
-            <x-iconbutton id="create_game_button">
+            <x-iconbutton id="create_game_button" data-bind="click: createGame">
                 <a id="create_game_link">Create this Game</a>
             </x-iconbutton>
-            <x-iconbutton id="join_game_button">
+            <x-iconbutton id="join_game_button" data-bind="click: joinGame">
                 <a id="join_game_link">Join this Game</a>
             </x-iconbutton>
         </div>

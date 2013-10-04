@@ -1,19 +1,25 @@
 var App = App || {};
-App.createController = function (sockets, viewModel) {
+
+App.init = function () {
+    app = App.createController();
+    app.init();
+}
+
+App.createController = function () {
     return new function () {
-        self = this;
+        var self = this;
         function loadOptionsInto (viewModel)  {
             var options = App.Options.loadOptions();
-            if (options) {
+            if (options && options.playerName && options.gameName ) {
                 viewModel.playerName(options.playerName);
                 viewModel.gameName(options.gameName);
             }
         };
+
         self.init = function () {
             self.viewModel = App.createViewModel();
-            self.loadOptionsInto(viewModel);
-            self.sockets = App.createSocket(App.Options.socketUrl, self.viewModel);
-            ko.applyBindings(app.viewModel);
+            loadOptionsInto(self.viewModel);
+            ko.applyBindings(self.viewModel);
         };
         return self;
     };

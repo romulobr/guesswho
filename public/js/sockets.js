@@ -1,7 +1,7 @@
 var App = App || {};
 App.createSocket = function () {
     return new function (socketUrl, viewModel) {
-        self = this;
+        var self = this;
         self.socket = io.connect(socketUrl);
         self.socket.on('join success', function (data) {
             console.log("You joined the game: "+JSON.stringify(data));
