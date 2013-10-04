@@ -3,10 +3,10 @@ var App = App || {};
 App.Options = {
     socketUrl: window.location.protocol+"//"+window.location.hostname+":7001",
     defaultOptions: {gameName: null, playerName: null},
-    loadOptions: function () {
+    load: function () {
         return store.get('options');
     },
-    saveOptions: function (options) {
+    save: function (options) {
         return store.set('options', options);
     }
 }

@@ -29,10 +29,10 @@
         </x-appbar>
         <div id='content'>
             <h1> Your Name</h1>
-            <input id="player_name_input" type="text" data-bind="text: playerName">
+            <input id="player_name_input" type="text" data-bind="value: playerName">
 
             <h1> Game's Name </h1>
-            <input id="game_name_input" type="text" data-bind="text: gameName">
+            <input id="game_name_input" type="text" data-bind="value: gameName">
             <br/>
             <x-iconbutton id="create_game_button" data-bind="click: createGame">
                 <a id="create_game_link">Create this Game</a>
