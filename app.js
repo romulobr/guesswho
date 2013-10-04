@@ -46,6 +46,11 @@ app.post('/game', function (req, res) {
       res.json({status:response.status});
   });
 });
+console.log('app running on: %s, %s', process.env.PORT, process.env.IP);
+if (!!process.env.PORT && !!process.env.IP){
+    app.listen(process.env.PORT, process.env.IP);
+}else{
+    app.listen(3000);
+}
 
-app.listen(process.env.PORT, process.env.IP);
 console.log('%j\n', app.routes);
