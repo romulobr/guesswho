@@ -28,12 +28,14 @@
             <div>?</div>
         </x-appbar>
         <div id='content'>
-            <h1> Your Name</h1>
-            <input id="player_name_input" type="text" data-bind="value: playerName">
-
-            <h1> Game's Name </h1>
-            <input id="game_name_input" type="text" data-bind="value: gameName">
-            <br/>
+            <fieldset>
+                <h1> Your Name </h1>
+                <input id="player_name_input" type="text" data-bind="value: playerName">
+            </fieldset>
+            <fieldset>
+                <h1> Game's Name </h1>
+                <input id="game_name_input" type="text" data-bind="value: gameName">
+            </fieldset>
             <x-iconbutton id="create_game_button" data-bind="click: createGame">
                 <a id="create_game_link">Create this Game</a>
             </x-iconbutton>
@@ -48,9 +50,14 @@
             <div>?</div>
         </x-appbar>
         <div id='content'>
-            <H1>YOU JOINED THE GAME</H1>
+        <h1>Pick your characters.</h1>
             <ul id="player_list" data-bind="foreach: players">
-                <li data-bind="text: realName"></li> <input data-bind="value: fictionalName"/>
+                <li>
+                    <fieldset>
+                        <spam data-bind="text: realName"> </spam> :
+                        <input data-bind="value: fictionalName"/>
+                    </fieldset>
+                </li>
             </ul>
         </div>
     </div>
