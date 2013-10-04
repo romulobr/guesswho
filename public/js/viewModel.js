@@ -5,6 +5,8 @@ App.createViewModel = function () {
         self.players = ko.observableArray([]);
         self.connected = ko.observable(false);
         self.message = ko.observable('');
+        self.gameName = ko.observable('');
+        self.playerName = ko.observable('');
 
         self.addPlayer = function (player) {
             self.players.push(player);
@@ -27,4 +29,4 @@ App.createViewModel = function () {
         });
         }
     };
-}
+};

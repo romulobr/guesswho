@@ -29,4 +29,4 @@ App.createSocket = function () {
 
         return self;
     }
-}
+};
