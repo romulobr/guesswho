@@ -47,5 +47,5 @@ app.post('/game', function (req, res) {
   });
 });
 
-app.listen(80);
+app.listen(process.env.PORT, process.env.IP);
 console.log('%j\n', app.routes);
