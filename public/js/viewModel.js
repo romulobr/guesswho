@@ -1,19 +1,18 @@
 var App = App || {};
 
 App.createViewModel = function () {
-    return new function () {
-        var self = this;
-        self.players = ko.observableArray([]);
-        self.connected = ko.observable(false);
-        self.message = ko.observable('');
-        self.gameName = ko.observable('gameName');
-        self.playerName = ko.observable('playerName');
+    var self = {
+        players : ko.observableArray([]),
+        connected : ko.observable(false),
+        message : ko.observable(''),
+        gameName : ko.observable('gameName'),
+        playerName : ko.observable('playerName'),
 
-        self.addPlayer = function (player) {
+        addPlayer : function (player) {
             self.players.push(player);
-        };
+        },
 
-        self.updatePlayers = function (newPlayers) {
+        updatePlayers : function (newPlayers) {
             var oldPlayer;
             _.each(newPlayers, function (newPlayer) {
                 oldPlayer = _.findWhere(self.players(), {realName: newPlayer.realName});
@@ -22,20 +21,20 @@ App.createViewModel = function () {
                     self.addPlayer(newPlayer);
                 }
             });
-        }
+        },
 
-        self.removePlayer = function (playerName) {
+        removePlayer : function (playerName) {
             self.players.remove( function (player) {
                 return player.realName === playerName;
             });
-        }
+        },
 
-        self.message = function (message) {
+        message : function (message) {
             var template = _.template("<div class=\"note\"><%= message %></div>");
             $('body').append(template({message:message}));
-        }
+        },
 
-        self.createGame = function () {
+        createGame : function () {
             function validOptions() {
                 console.log("game name: "+self.gameName());
                 console.log("player name: "+self.playerName());
@@ -49,14 +48,13 @@ App.createViewModel = function () {
             } else {
                 self.message("We need a name and a game name to proceed.");
             }
-        };
+        },
 
-        self.joinGame = function () {
+        joinGame : function () {
             App.createSocket(self,App.Options.socketUrl);
             App.Options.save({gameName: self.gameName(), playerName: self.playerName()});
             $('x-flipbox')[0].toggle();
-        };
-
-        return self;
+        }
     };
+    return self;
 };

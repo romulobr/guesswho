@@ -6,21 +6,19 @@ App.init = function () {
 }
 
 App.createController = function () {
-    return new function () {
-        var self = this;
-        function loadOptionsInto (viewModel)  {
-            var options = App.Options.load();
-            if (options && options.playerName && options.gameName ) {
-                viewModel.playerName(options.playerName);
-                viewModel.gameName(options.gameName);
-            }
-        };
-
-        self.init = function () {
+    var loadOptionsInto = function (viewModel)  {
+        var options = App.Options.load();
+        if (options && options.playerName && options.gameName ) {
+            viewModel.playerName(options.playerName);
+            viewModel.gameName(options.gameName);
+        }
+    };
+    var self = {
+        init: function () {
             self.viewModel = App.createViewModel();
             loadOptionsInto(self.viewModel);
             ko.applyBindings(self.viewModel);
-        };
-        return self;
+        }
     };
+    return self;
 };
