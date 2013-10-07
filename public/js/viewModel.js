@@ -1,7 +1,7 @@
 var App = App || {};
 
 App.createViewModel = function () {
-    var self = {
+    var viewModel = {
         players : ko.observableArray([]),
         connected : ko.observable(false),
         message : ko.observable(''),
@@ -9,22 +9,31 @@ App.createViewModel = function () {
         playerName : ko.observable('playerName'),
 
         addPlayer : function (player) {
-            self.players.push(player);
+            viewModel.players.push(player);
+        },
+
+        updateName : function (player) {
+            console.log('updating name'+ player.fictionalName);
+            oldPlayer = _.findWhere(viewModel.players(), {realName: player.realName});
+            oldPlayer.fictionalName(player.fictionalName);
         },
 
         updatePlayers : function (newPlayers) {
             var oldPlayer;
             _.each(newPlayers, function (newPlayer) {
-                oldPlayer = _.findWhere(self.players(), {realName: newPlayer.realName});
-                if (!oldPlayer && newPlayer.realName != self.playerName()) {
-                    newPlayer.fictionalName = "change me."
-                    self.addPlayer(newPlayer);
+                oldPlayer = _.findWhere(viewModel.players(), {realName: newPlayer.realName});
+                if (!oldPlayer && newPlayer.realName != viewModel.playerName()) {
+                    newPlayer.fictionalName = ko.observable("change me.")
+                    newPlayer.fictionalName.subscribe(function (newValue) {
+                        viewModel.client.changeName(this.realName,newValue);
+                    }, newPlayer);
+                    viewModel.addPlayer(newPlayer);
                 }
             });
         },
 
         removePlayer : function (playerName) {
-            self.players.remove( function (player) {
+            viewModel.players.remove( function (player) {
                 return player.realName === playerName;
             });
         },
@@ -36,25 +45,30 @@ App.createViewModel = function () {
 
         createGame : function () {
             function validOptions() {
-                console.log("game name: "+self.gameName());
-                console.log("player name: "+self.playerName());
-                return self.gameName() && self.playerName();
+                console.log("game name: "+viewModel.gameName());
+                console.log("player name: "+viewModel.playerName());
+                return viewModel.gameName() && viewModel.playerName();
             };
             if (validOptions()) {
-                $.post('/game', {gameName:self.gameName()}, function (data, textStatus) {
-                    self.game = data.game;
-                    self.joinGame();
+                $.post('/game', {gameName:viewModel.gameName()}, function (data, textStatus) {
+                    viewModel.game = data.game;
                 });
             } else {
-                self.message("We need a name and a game name to proceed.");
+                viewModel.message("We need a name and a game name to proceed.");
             }
         },
 
         joinGame : function () {
-            App.createSocket(self,App.Options.socketUrl);
-            App.Options.save({gameName: self.gameName(), playerName: self.playerName()});
+            viewModel.createGame();
+            viewModel.client = App.createSocket(viewModel,App.Options.socketUrl);
+            App.Options.save({gameName: viewModel.gameName(), playerName: viewModel.playerName()});
+            $('x-flipbox')[0].toggle();
+        },
+
+        back : function () {
+            viewModel.client && viewModel.client.connection && viewModel.client.connection.end();
             $('x-flipbox')[0].toggle();
         }
     };
-    return self;
+    return viewModel;
 };
