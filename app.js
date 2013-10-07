@@ -1,5 +1,6 @@
 "use strict";
 var express = require('express'),
+    http = require('http'),
     redis = require('redis'),
     socketIo = require('socket.io'),
     _ = require('underscore'),
@@ -50,7 +51,7 @@ console.log('app running on: %s, %s', process.env.PORT, process.env.IP);
 if (!!process.env.PORT && !!process.env.IP){
     app.listen(process.env.PORT, process.env.IP);
 }else{
-    app.listen(3000);
+    http.createServer(app).listen(3000);
 }
 
 console.log('%j\n', app.routes);
